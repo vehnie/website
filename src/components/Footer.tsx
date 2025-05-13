@@ -1,5 +1,5 @@
+// Remove the Star import since we won't need it anymore
 import React from 'react';
-import { Star } from 'lucide-react';
 import { scrollToSection } from '../utils/scrollUtils';
 
 const Footer: React.FC = () => {
@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div className="mb-6 md:mb-0">
-            <Star size={24} className="text-white" />
+            <img src="/logo.png" alt="Logo" className="h-24 w-auto brightness-0 invert" />
           </div>
           
           <div className="flex flex-wrap justify-center gap-8">

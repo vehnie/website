@@ -24,7 +24,7 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-6 flex items-center gap-8">
         <div className="logo">
-          <Star size={24} className="text-black" />
+          <img src="/logo.png" alt="Logo" className="h-14 w-auto" />
         </div>
         
         <nav className="hidden md:block">
