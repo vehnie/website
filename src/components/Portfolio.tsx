@@ -16,6 +16,12 @@ const Portfolio: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="group relative overflow-hidden rounded-sm">
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block md:hidden absolute inset-0 z-10"
+              />
               <div className="aspect-[4/3] overflow-hidden bg-gray-100">
                 <img 
                   src={project.imageUrl} 
@@ -35,7 +41,7 @@ const Portfolio: React.FC = () => {
                       href={project.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-white flex items-center justify-center"
+                      className="hidden md:flex w-10 h-10 rounded-full bg-white items-center justify-center"
                     >
                       <ArrowUpRight size={16} className="text-gray-800" />
                     </a>

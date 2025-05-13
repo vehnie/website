@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { education } from '../data/educationData';
 import { ArrowUpRight } from 'lucide-react';
 
 const Education: React.FC = () => {
+  const [draggedTag, setDraggedTag] = useState<string | null>(null);
+
+  const generateUniqueKey = (eduId: number, tag: string, index: number) => {
+    return `edu-${eduId}-${tag.replace(/\s+/g, '')}-${index}`;
+  };
+
+  const handleDragStart = (e: React.DragEvent, tag: string) => {
+    setDraggedTag(tag);
+    e.dataTransfer.setData('text/plain', tag);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedTag(null);
+  };
+
   return (
     <section id="education" className="py-20 bg-white">
       <div className="container mx-auto px-6">
@@ -26,9 +41,19 @@ const Education: React.FC = () => {
                 
                 <p className="text-gray-600 mb-4">{edu.description}</p>
                 
-                <div className="flex gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-4">
                   {edu.tags.map((tag, index) => (
-                    <span key={index} className="px-4 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
+                    <span
+                      key={generateUniqueKey(edu.id, tag, index)}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, tag)}
+                      onDragEnd={handleDragEnd}
+                      className={`
+                        px-4 py-1 bg-gray-100 text-gray-600 text-sm rounded-full
+                        cursor-move hover:bg-gray-200 transition-colors
+                        ${draggedTag === tag ? 'opacity-50' : ''}
+                      `}
+                    >
                       {tag}
                     </span>
                   ))}
