@@ -1,23 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { experiences } from '../data/experienceData';
 import { ArrowUpRight } from 'lucide-react';
 
 const Experience: React.FC = () => {
-  const [draggedTag, setDraggedTag] = useState<string | null>(null);
-
-  const generateUniqueKey = (expId: number, tag: string, index: number) => {
-    return `exp-${expId}-${tag.replace(/\s+/g, '')}-${index}`;
-  };
-
-  const handleDragStart = (e: React.DragEvent, tag: string) => {
-    setDraggedTag(tag);
-    e.dataTransfer.setData('text/plain', tag);
-  };
-
-  const handleDragEnd = () => {
-    setDraggedTag(null);
-  };
-
   return (
     <section id="experience" className="py-20 bg-white">
       <div className="container mx-auto px-6">
@@ -42,15 +27,8 @@ const Experience: React.FC = () => {
                 <div className="flex flex-wrap gap-2 mt-4">
                   {exp.tags.map((tag, index) => (
                     <span
-                      key={generateUniqueKey(exp.id, tag, index)}
-                      draggable
-                      onDragStart={(e) => handleDragStart(e, tag)}
-                      onDragEnd={handleDragEnd}
-                      className={`
-                        px-4 py-1 bg-gray-100 text-gray-600 text-sm rounded-full
-                        cursor-move hover:bg-gray-200 transition-colors
-                        ${draggedTag === tag ? 'opacity-50' : ''}
-                      `}
+                      key={`${exp.id}-${tag}-${index}`}
+                      className="px-4 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
                     >
                       {tag}
                     </span>
